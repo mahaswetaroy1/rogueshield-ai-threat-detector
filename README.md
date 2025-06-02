@@ -4,17 +4,17 @@ RogueShield is an AI-powered threat detection and attack forecasting system buil
 
 ---
 
-## 🔍 Features
+## Features
 
-- 🔐 Multiclass intrusion detection using deep learning
-- 📊 Future attack forecasting with RNN/LSTM
-- 🧠 Model explainability via SHAP
-- 🛰 MITRE ATT&CK tactic & technique mapping
-- 🌐 Real-time dashboard built with Streamlit
+-  Multiclass intrusion detection using deep learning
+-  Future attack forecasting with RNN/LSTM
+-  Model explainability via SHAP
+-  MITRE ATT&CK tactic & technique mapping
+-  Real-time dashboard built with Streamlit
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - **Machine Learning**: TensorFlow, Scikit-learn
 - **Explainability**: SHAP
@@ -24,7 +24,7 @@ RogueShield is an AI-powered threat detection and attack forecasting system buil
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 rogueshield/
@@ -40,7 +40,7 @@ rogueshield/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/rogueshield-ai-threat-detector.git
@@ -53,24 +53,23 @@ streamlit run app/app.py
 
 ---
 
-## 📈 Sample Outputs
+## Sample Outputs
 
-> [Screenshots / GIFs of prediction output, SHAP visualizations, MITRE mapping]  
-> *You’ll add these in Phase 4–6*
+
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 📬 Contact
+## Contact
 
 For questions or collaboration:  
 **Mahasweta Roy**  
-[LinkedIn](https://www.linkedin.com/in/mahasweta-roy-9b79b6150/)) | [Email](mailto:mahaswetaroy123@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/mahasweta-roy-9b79b6150/) | [Email](mailto:mahaswetaroy123@gmail.com)
 
 ---
 
