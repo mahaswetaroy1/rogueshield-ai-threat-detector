@@ -20,22 +20,29 @@ RogueShield is an AI-powered threat detection and attack forecasting system buil
 - **Explainability**: SHAP
 - **Frontend**: Streamlit
 - **Backend**: Flask (optional REST API)
-- **Data**: [NSL-KDD Dataset](https://www.unb.ca/cic/datasets/nsl.html)
+- **Data**: [UNSW-NB15 Dataset](https://www.unsw.adfa.edu.au/unsw-canberra-cyber/cybersecurity/ADFA-NB15-Datasets/)
+
 
 ---
 
 ## Project Structure
 
 ```
-rogueshield/
-├── data/              # Raw and processed datasets
-├── notebooks/         # Jupyter notebooks for EDA and modeling
-├── models/            # Saved models (h5 format)
-├── app/               # Streamlit app files
-├── explainability/    # SHAP plots and scripts
-├── requirements.txt   # Python dependencies
-├── LICENSE            # MIT License
-└── README.md          # You are here
+rogueshield-ai-threat-detector/
+├── data/                    # Raw dataset CSVs
+├── notebooks/
+│   ├── eda_unsw_nb15.ipynb
+│   ├── forecasting/
+│   │   ├── attack_volume/forecast.png
+│   │   ├── attack_volume_forecast.ipynb
+│   │   └── attack_category_forecast.ipynb
+├── models/                  # Saved TensorFlow models
+├── explainability/          # SHAP, MITRE mappings
+├── app/                     # Streamlit/Flask app (upcoming)
+├── requirements.txt
+├── README.md
+├── LICENSE
+
 ```
 
 ---
@@ -53,7 +60,28 @@ streamlit run app/app.py
 
 ---
 
-## Sample Outputs
+## Attack Volume Forecasting
+
+This module uses time-series forecasting to analyze and predict the volume of cyberattacks over time from the UNSW-NB15 dataset. This helps SOC teams forecast potential spikes in attack traffic for proactive mitigation.
+
+### Objective
+- Predict future attack volumes (14-day horizon)
+- Identify temporal patterns and seasonal behaviors in attack frequencies
+
+### Tools & Methods
+- Facebook Prophet (additive time-series model)
+- Pandas, Plotly, Matplotlib
+
+### Results
+- **Trend:** Slightly decreasing trend over the forecast horizon
+- **Weekly Pattern:** Highest attack activity observed on **Thursdays**
+- **Forecast Confidence Interval:** 95%
+
+### Output
+![Attack Forecast](notebooks/forecasting/attack_volume/forecast.png)
+
+🔗 [View Forecast Notebook](notebooks/forecasting/attack_volume_forecast.ipynb)
+🔗 [View EDA Notebook](notebooks/eda_unsw_nb15.ipynb)
 
 
 
