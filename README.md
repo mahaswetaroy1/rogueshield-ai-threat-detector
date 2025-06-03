@@ -80,13 +80,16 @@ This module uses time-series forecasting to analyze and predict the volume of cy
 
 Actual vs. forecast overlay indicates consistent prediction performance over observed periods.
 
-![Forecast Evaluation](notebooks/forecasting/attack_volume/actual_vs_forecast.png)
+
 
 ### Output
-![Attack Forecast](notebooks/forecasting/attack_volume/forecast.png)
 
-🔗 [View Forecast Notebook](notebooks/forecasting/attack_volume_forecast.ipynb)
-🔗 [View EDA Notebook](notebooks/eda_unsw_nb15.ipynb)
+![Forecast](notebooks/forecasting/attack_volume/forecast.png)
+
+![Actual vs Forecast](notebooks/forecasting/attack_volume/actual_vs_forecast.png)
+
+[View Forecast Notebook](notebooks/forecasting/attack_volume_forecast.ipynb)
+[View EDA Notebook](notebooks/eda_unsw_nb15.ipynb)
 
 
 
