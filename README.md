@@ -76,9 +76,7 @@ This module uses time-series forecasting to analyze and predict the volume of cy
 - **Trend:** Slightly decreasing trend over the forecast horizon
 - **Weekly Pattern:** Highest attack activity observed on **Thursdays**
 - **Forecast Confidence Interval:** 95%
-- **Forecast Accuracy Visuals** RMSE and MAE plots show how forecast error varies over time horizons.
-
-Actual vs. forecast overlay indicates consistent prediction performance over observed periods.
+- **Forecast Accuracy Visuals** RMSE and MAE plots show how forecast error varies over time horizons. Actual vs. forecast overlay indicates consistent prediction performance over observed periods.
 
 
 
