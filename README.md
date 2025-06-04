@@ -94,8 +94,6 @@ This module uses time-series forecasting to analyze and predict the volume of cy
 
 ---
 
----
-
 ## Attack Category Trend Forecasting
 
 This module predicts future distributions of cyberattack categories (e.g., DoS, Exploits, Reconnaissance) using LSTM networks.
@@ -111,8 +109,9 @@ This module predicts future distributions of cyberattack categories (e.g., DoS, 
 
 ### Output
 
-![Forecast](notebooks/forecasting/forecast.png)
-![Actual vs Forecast](notebooks/forecasting/actual_vs_forecast.png)
+![Category Forecast](notebooks/forecasting/attack_category/actual_vs_forecast_category_0.png)
+![Category Loss Curve](notebooks/forecasting/attack_category/loss_category_forecast.png)
+
 
 [View Category Forecast Notebook](notebooks/forecasting/attack_category_forecast.ipynb)
 
