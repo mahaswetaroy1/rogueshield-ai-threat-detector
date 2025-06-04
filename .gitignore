@@ -3,3 +3,5 @@ __pycache__/
 *.ipynb_checkpoints
 .env
 *.h5
+!models/time_to_next_dur_gru/gru_duration_forecast.h5
+
