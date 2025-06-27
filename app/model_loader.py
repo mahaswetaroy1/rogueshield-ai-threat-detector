@@ -14,3 +14,4 @@ def load_models():
     except Exception as e:
         st.error(f"Failed to load models: {e}")
         raise
+

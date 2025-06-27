@@ -1,10 +1,18 @@
 import pandas as pd
 import numpy as np
+import streamlit as st
 
+@st.cache_resource
+def load_model():
+    import tensorflow as tf
+    return tf.keras.models.load_model("models/intrusion_classifier/rogueshield_intrusion_model.h5")
+
+model = load_model()
+
+# Define preprocessing helpers
 def read_and_validate_csv(uploaded_file, expected_columns):
     """
-    Reads the CSV, ensures all expected_columns are present,
-    and returns a DataFrame with exactly those columns (in order).
+    Validates uploaded CSV for expected columns and returns sanitized DataFrame.
     """
     try:
         df = pd.read_csv(uploaded_file)
@@ -17,32 +25,20 @@ def read_and_validate_csv(uploaded_file, expected_columns):
 
 def prepare_input(df, expected_features, categorical_features=None):
     """
-    Prepares input for TensorFlow model:
-    - Categorical features as string
-    - All others coerced to float32
+    Converts input DataFrame into model-friendly format (dict of float32 ndarrays).
     """
+    try:
+        df = df[expected_features]
+        df = df.apply(pd.to_numeric, errors="coerce")
+        df.dropna(inplace=True)
 
-    cats = set(categorical_features or [])
-    nums = [c for c in expected_features if c not in cats]
+        for col in df.columns:
+            if df[col].dtype == 'object':
+                raise ValueError(f"Column '{col}' has invalid dtype: object")
 
-    df = df[expected_features].copy()
+        df = df.astype("float32")
+        return {col: df[col].values.reshape(-1, 1) for col in df.columns}
 
-    # Strip whitespace from everything
-    df = df.applymap(lambda x: str(x).strip() if isinstance(x, str) else x)
-
-    # Coerce numerics
-    for c in nums:
-        df[c] = pd.to_numeric(df[c], errors="coerce").astype(np.float32)
-
-    for c in cats:
-        df[c] = df[c].astype(str)
-
-    # Catch any conversion failures
-    if df[nums].dtypes.eq("object").any():
-        raise ValueError("Non-numeric values found in numeric columns.")
-
-    if df[nums].isnull().any().any():
-        raise ValueError("NaNs found in numeric columns after coercion.")
-
-    return {c: df[c].values.reshape(-1, 1) for c in expected_features}
+    except Exception as e:
+        raise ValueError(f"Input preparation failed: {str(e)}")
 

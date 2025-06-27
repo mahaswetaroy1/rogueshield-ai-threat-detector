@@ -1,54 +1,71 @@
 import streamlit as st
+st.set_page_config(page_title="RogueShield: AI Threat Detection", layout="wide")
+
 import pandas as pd
 import numpy as np
 from model_loader import load_models
 from utils import read_and_validate_csv, prepare_input
 
-st.set_page_config(page_title="RogueShield: AI Threat Detection", layout="wide")
-st.title("RogueShield: Real-Time Intrusion Detection")
+# Page config
+st.title("RogueShield: Real-Time AI Threat Detection")
 
+# Intro section
+st.markdown("""
+**RogueShield** is an AI-powered intrusion detection system that leverages deep learning to identify, classify, and explain malicious network behavior in real-time.  
+This tool uses two models:
+- A preprocessing model to encode and format raw network data
+- A classifier trained to detect multiple types of attacks based on the NSL-KDD dataset
+
+Upload your network traffic CSV below to get instant predictions and insights on potential threats.
+""")
+
+# Class labels
 class_names = [
     'Analysis','Backdoor','DoS','Exploits','Fuzzers',
     'Generic','Normal','Reconnaissance','Shellcode','Worms'
 ]
 
-# 1) load your two models (preprocessing first, then classifier)
+# Load models
 preproc_model, intr_model = load_models()
 
-# 2) extract the raw input names (strip the “:0”)
+# Determine required features
 expected_features = [inp.name.split(":")[0] for inp in preproc_model.inputs]
+categorical_features = ['proto', 'service', 'state']
 
-# 3) tell it which of those are truly categorical
-categorical_features = ['proto','service','state']
-
+# File upload
 uploaded = st.file_uploader("Upload network traffic CSV", type="csv")
 if uploaded:
     try:
         df = read_and_validate_csv(uploaded, expected_features)
         st.success("File loaded and validated.")
-        st.subheader("Input Preview");  st.dataframe(df.head())
+        st.subheader("Input Preview")
+        st.dataframe(df.head())
+        st.write("Column types:")
+        st.write(df.dtypes)
 
-        # prepare input → dict[str→ndarray]
+        # Prepare input
         X_dict = prepare_input(df, expected_features, categorical_features)
 
-        # run through your Keras pipelines
-        X_all  = preproc_model.predict(X_dict)
-        yhat   = intr_model.predict(X_all)
+        # Predict
+        X_all = preproc_model.predict(X_dict)
+        yhat = intr_model.predict(X_all)
 
-        # pick off the top‐classes
-        idxs   = np.argmax(yhat, axis=1)
-        conf   = yhat.max(axis=1)
+        # Extract predictions
+        idxs = np.argmax(yhat, axis=1)
+        conf = yhat.max(axis=1)
         labels = [class_names[i] for i in idxs]
 
-        # show the first 10
-        res = pd.DataFrame({
-           "Predicted Class": labels[:10],
-           "Confidence":     np.round(conf[:10],3)
+        # Display
+        results = pd.DataFrame({
+            "Predicted Class": labels[:10],
+            "Confidence": np.round(conf[:10], 3)
         })
-        st.subheader("Top-10 Predictions");  st.dataframe(res)
+        st.subheader("Top-10 Predictions")
+        st.dataframe(results)
 
-        csv = res.to_csv(index=False).encode()
-        st.download_button("Download CSV", data=csv, file_name="predictions.csv")
+        # Download
+        csv = results.to_csv(index=False).encode()
+        st.download_button("⬇️ Download CSV", data=csv, file_name="rogueshield_predictions.csv")
 
     except Exception as e:
         st.error(f"Error: {e}")

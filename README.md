@@ -1,31 +1,33 @@
 # RogueShield: AI-Powered Threat Detection & Forecasting
 
-RogueShield is an AI-powered threat detection and attack forecasting system built using TensorFlow, Streamlit, and SHAP. It classifies network intrusions in real-time, forecasts future attack patterns, and maps results to the MITRE ATT&CK framework — making it a powerful tool for cybersecurity automation and intelligence.
+**RogueShield** is a complete cybersecurity AI system that detects, explains, and forecasts cyber threats in real time. Built with **TensorFlow**, **Streamlit**, and **SHAP**, it offers an end-to-end threat intelligence pipeline — from multiclass intrusion detection to LSTM-based category forecasting and GRU-based time-to-attack regression. It also aligns explainability results with the **MITRE ATT&CK** framework.
+
+This project demonstrates real-world **AI in cybersecurity**, full-stack **ML deployment**, and advanced **model explainability**, making it a strong fit for roles in Machine Learning, AI Security, and Threat Intelligence.
 
 ---
 
 ## Features
 
-- Multiclass intrusion detection using deep learning
+- Real-time **Multiclass Intrusion Detection** using deep learning
 - Forecasts both attack *categories* and *time-to-next attack* using LSTM/GRU models
 - Full model explainability using SHAP (PermutationExplainer)
 - Global and local SHAP plots (bar, waterfall, decision, force)
 - Class-wise feature attribution for deeper threat analysis
-- MITRE ATT&CK tactic and technique mapping for explainable AI
-- Interactive dashboards via Streamlit
-- Ready for deployment via Flask REST API 
+- MITRE ATT&CK tactic and technique mapping for explainable AI (experimental)
+- Interactive dashboards via **Streamlit**
+- Ready for deployment via **Flask REST API**
 
 ---
+
 
 ##  Tech Stack
 
 - **Machine Learning**: TensorFlow, Scikit-learn
-- **Explainability**: SHAP
+- **Explainability**: SHAP (Permutation Explainer)
 - **Visualization**: Matplotlib, Plotly
 - **Frontend**: Streamlit
 - **Backend**: Flask 
 - **Data**: [UNSW-NB15 Dataset](https://www.unsw.adfa.edu.au/unsw-canberra-cyber/cybersecurity/ADFA-NB15-Datasets/)
-
 
 ---
 
@@ -49,6 +51,15 @@ rogueshield-ai-threat-detector/
 │ └── time_to_next_dur_gru/ # GRU model
 ├── app/
 │ └── app.py # Streamlit dashboard
+├── init.py
+├── app.py # Main Streamlit launcher
+├── model_loader.py # Model loading functions (DNN, LSTM, GRU)
+├── utils.py # Utility functions (e.g., preprocessing, mapping)
+├── pages/ # Streamlit pages (modular)
+│ ├── explainability.py # SHAP visualizations + MITRE mapping
+│ ├── forecasting.py # LSTM and GRU forecasts (category + time-to-next)
+│ └── intrusion.py # Intrusion detection interface
+└── pycache/ # Bytecode cache (auto-generated)  
 ├── requirements.txt
 ├── README.md
 ├── LICENSE
@@ -69,6 +80,46 @@ streamlit run app/app.py
 ```
 
 ---
+
+---
+
+## Streamlit Web App Interface
+
+The RogueShield includes an interactive Streamlit dashboard to demonstrate real-time intrusion detection, forecasting, and explainability features.
+
+Note: The dashboard is currently under active development. Some modules may not function as expected. A fully working UI version will be released soon.
+
+- **Intrusion Detection** (`pages/intrusion.py`):  
+  Upload network traffic CSVs and get real-time predictions (Normal, DoS, Exploit, etc.)  
+  Confidence scores + probability breakdowns included.
+
+- **Attack Forecasting** (`pages/forecasting.py`):  
+  Forecasts **attack category trends** using LSTM and **time-to-next attack** using GRU.  
+  Ideal for SOC teams to prepare for surges in threat types or traffic.
+
+- **Model Explainability** (`pages/explainability.py`):  
+  SHAP-based insights into model behavior.  
+  Includes global bar plots, local force plots, and MITRE ATT&CK tactic mapping.
+
+Navigate between pages via the sidebar.  
+Code for each module is in `app/pages/`.
+
+**Development Status**
+RogueShield is actively evolving, with the following areas under refinement:
+
+Model Integration Fixes:
+Some TensorFlow model layers (e.g., those using custom metrics/loss functions) are being re-exported to ensure reliable loading across environments.
+
+Explainability & Forecasting Modules:
+The dashboards and visualizations are functional but currently undergoing final SHAP value rendering and LSTM model binding. Frontend loading is stable.
+
+App Deployment Edge Cases:
+Minor compatibility issues are being resolved to streamline app behavior across different OS configurations (Windows/Mac).
+
+Note: These issues do not impact the core logic or data pipeline — all preprocessing, predictions, and data handling are production-ready.
+
+---
+
 
 ## Intrusion Detection Module
 
@@ -210,5 +261,6 @@ For questions or collaboration:
 [LinkedIn](https://www.linkedin.com/in/mahasweta-roy-9b79b6150/) | [Email](mailto:mahaswetaroy123@gmail.com)
 
 ---
-
+## Star This Project
+If you found this project useful, give it a ⭐ on GitHub to support my work!
 
