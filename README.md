@@ -81,8 +81,6 @@ streamlit run app/app.py
 
 ---
 
----
-
 ## Streamlit Web App Interface
 
 The RogueShield includes an interactive Streamlit dashboard to demonstrate real-time intrusion detection, forecasting, and explainability features.
@@ -104,7 +102,7 @@ Note: The dashboard is currently under active development. Some modules may not 
 Navigate between pages via the sidebar.  
 Code for each module is in `app/pages/`.
 
-**Development Status**
+### Development Status
 RogueShield is actively evolving, with the following areas under refinement:
 
 Model Integration Fixes:
