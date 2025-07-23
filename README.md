@@ -2,8 +2,6 @@
 
 **RogueShield** is a complete cybersecurity AI system that detects, explains, and forecasts cyber threats in real time. Built with **TensorFlow**, **Streamlit**, and **SHAP**, it offers an end-to-end threat intelligence pipeline — from multiclass intrusion detection to LSTM-based category forecasting and GRU-based time-to-attack regression. It also aligns explainability results with the **MITRE ATT&CK** framework.
 
-This project demonstrates real-world **AI in cybersecurity**, full-stack **ML deployment**, and advanced **model explainability**, making it a strong fit for roles in Machine Learning, AI Security, and Threat Intelligence.
-
 ---
 
 ## Features
